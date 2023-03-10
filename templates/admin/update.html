@@ -1,0 +1,102 @@
+{% extends "admin/headerfooter.html" %}
+{% block content %}
+
+
+	<div class="outter-wp">
+											<!--/sub-heard-part-->
+								<div class="sub-heard-part">
+								 <ol class="breadcrumb m-b-0">
+								<li><a href="/adindex/">Home</a></li>
+								<li class="active">Update</li>
+									</ol>
+								</div>	
+											<!--/sub-heard-part-->	
+												<!--/forms-->
+									<div class="forms-main">
+											<h2 class="inner-tittle">Update Here</h2>
+												<div class="graph-form">
+											<div class="form-body">
+									<h4 style="text-align: center;color: white">{{success}}</h4>
+									<h4 style="text-align: center ;color: red ">{{error}}</h4>
+
+                    {% for x in data %}
+							<form action="/adupdate/?regid={{x.id}}" enctype="multipart/form-data" method="post"> 
+							{% csrf_token %}
+
+    <div class="form-group"> 
+    	<label for="exampleInputEmail1">Name</label> 
+    	<input name="name" type="text" class="form-control" id="exampleInputEmail1" placeholder="Name" value="{{x.name}}">
+     </div> 
+
+     <!-- <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+       <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> 
+   </div> --> 
+
+
+   <div class="form-group">
+    <label for="exampleInputFile">File input : </label>
+    <img src="{{x.image.url}}" width="200" height="200">
+<!--      <input type="file" id="exampleInputFile" name="image" value="{{x.image.url}}">
+ --><!--       <p class="help-block">Example block-level help text here.</p> 
+ -->  </div>
+
+    <div class="form-group">
+
+   	<label for="example"> Do you want to update image?</label>
+
+   	 <div class="radio">
+   	 <label>
+   	 	<input type="radio" name="imgup" value="yes" onchange="hide();" id="chkYes" required>
+   	 	Yes
+   	 </label>
+   	 </div>
+
+   	 <div class="radio">
+   	 <label>
+   	 	<input type="radio" name="imgup" value="no" onchange="hide();" checked required>
+   	 	No
+   	 </label>
+   	 </div>
+   	</div>
+    <div class="form-group" id="fileimg" style="display: none;">
+    	<label for="img">File Input</label>
+    <input type="file" id="exampleInputFile" name="image">
+</div>
+
+
+
+<div class="form-group"> 
+      <label for="exampleInputEmail1">Description</label> 
+      <input name="description" type="text" class="form-control" id="exampleInputEmail1" placeholder="description" value="{{x.desc}}">
+     </div> 
+
+
+
+
+
+
+   	 <button type="submit" class="btn btn-default">Submit</button> 
+   	</form> 
+   	{% endfor %}
+     </div>
+ </div>
+ <script type="text/javascript">
+ 	function hide(){
+ 		var chkYes = document.getElementById("chkYes");
+ 		var filediv = document.getElementById("fileimg");
+
+    filediv.style.display = chkYes.checked ? "block" : "none";
+    if(chkYes.checked){
+    	var img = document.getElementById("img").required = true;
+    }
+    else{
+    	var img = document.getElementById("img").required = false;
+    }
+ 	}
+ </script>
+</div>
+</div>
+
+
+													{% endblock %}   	}
